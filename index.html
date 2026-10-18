@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SamosaFi - Loan to Samosa Converter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{background:#0a0a0a;color:white;font-family:monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:20px}
+.card{background:#151515;border:1px solid #333;padding:30px;border-radius:20px;max-width:450px;width:100%;text-align:center}
+input{width:90%;padding:15px;margin:10px 0;background:#222;border:1px solid #444;color:white;border-radius:10px;font-size:18px}
+button{background:#FFD60A;color:black;padding:15px 30px;border:none;border-radius:10px;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:15px}
+#result{margin-top:25px;font-size:22px;line-height:1.6;display:none}
+.samosa{font-size:40px;animation:spin 1s infinite linear;display:inline-block}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🥟 SamosaFi 🥟</h1>
+<p style="color:#888">The World's First Loan-to-Samosa DeFi Protocol<br>(Totally Useless)</p>
+<input id="loan" type="number" placeholder="Enter your Loan Amount (Rs)" value="45000">
+<input id="rate" type="number" placeholder="Samosa Price (Rs)" value="15">
+<button onclick="calculate()">CONVERT TO SAMOSAS</button>
+<div id="result"></div>
+<p style="margin-top:20px;font-size:11px;color:#555">*Powered by Multi-Region Samosa CDN, Blockchain verified samosa freshness, AI wrapper for chutney optimization</p>
+</div>
+<script>
+function calculate(){
+ let loan = document.getElementById('loan').value;
+ let rate = document.getElementById('rate').value || 15;
+ let count = Math.floor(loan/rate);
+ let chutney = (count*0.2).toFixed(2);
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').innerHTML = `
+ <div class="samosa">🥟</div><br>
+ <b style="color:#FFD60A">${count.toLocaleString()} SAMOSAS</b><br>
+ You could have bought <b>${count}</b> samosas instead of paying fees.<br><br>
+ <span style="font-size:14px;color:#888">
+ Enterprise Metrics:<br>
+ - ${ (count*30).toLocaleString()} grams of aloo<br>
+ - ${chutney} liters of chutney wasted<br>
+ - Will take ${Math.floor(count/3)} days to eat if you eat 3/day
+ </span><br><br>
+ <button onclick="speak()" style="background:#222;color:white;border:1px solid #444">🔊 Hear AI Samosa Guru</button>
+ `;
+ for(let i=0;i<50;i++){ let s=document.createElement('div'); s.innerText='🥟'; s.style.position='fixed'; s.style.left=Math.random()*100+'vw'; s.style.top='-20px'; s.style.fontSize='20px'; s.style.animation=`fall ${2+Math.random()*3}s linear`; document.body.appendChild(s); setTimeout(()=>s.remove(),4000) }
+}
+function speak(){
+ let msg = new SpeechSynthesisUtterance(`Bro, you took a loan of ${document.getElementById('loan').value} rupees. That is ${Math.floor(document.getElementById('loan').value/15)} samosas. Think about it.`);
+ speechSynthesis.speak(msg);
+}
+</script>
+<style>@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}</style>
+</body>
+</html>
